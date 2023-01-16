@@ -33,7 +33,6 @@ const Dashboard = () => {
     isEditing,
     nameEdit,
     descriptionEdit,
-    getText
   } = useSelector((state) => state.textReducer)
 
   function handleEditClick() {
@@ -56,9 +55,7 @@ const Dashboard = () => {
     dispatch(setIsEditing())
     alert("Edited successfully")
     dispatch(getTexts(getResponse._id))
-    // window.location.reload()
   }
-  console.log(getText)
 
   const handleName = (e) => {
     const name = e.target.value
@@ -89,7 +86,6 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getUser(getResponse._id))
     dispatch(getTexts(getResponse._id))
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -100,17 +96,15 @@ const Dashboard = () => {
   const handleCreatetext = () => {
     const userDetail = { name: addname, description: addDescription }
     dispatch(postText(userDetail, getResponse._id))
-    alert('Successfully Added text')
+    alert('Successfully Created text')
     removeAddBox()
     dispatch(getTexts(getResponse._id))
-    // window.location.reload()
   }
 
   const handleDeleteText = (id) => {
     dispatch(deleteText(getResponse._id, id))
     alert('Successfully deleted text')
     dispatch(getTexts(getResponse._id))
-    // window.location.reload()
   }
 
   if (resetLink) {
@@ -151,30 +145,37 @@ const Dashboard = () => {
           {getTextItems.length ? (
             getTextItems.map((text) =>
               isEditing ? (
-                <Card key={text._id}>
-                  <NamePart key={text._id}>
-                    <Title>New Name</Title>
-                    <input
-                      defaultValue={text.name}
+                <Card width height>
+                <TopHeader>Edit Item</TopHeader>
+                <FromData>
+                  <FromDataInput>
+                    <Laber>Name</Laber>
+                    <Input
                       onChange={(e) => handleEditName(e)}
+                      name="name"
+                      type="text"
+                      placeholder="Input item name here"
+                      defaultValue={text.name}
                     />
-                  </NamePart>
-
-                  <Desc>
-                    <Title> New Description</Title>
-                    <Dis>
-                      <textarea
-                        defaultValue={text.description}
-                        onChange={(e) => handleEditDescription(e)}
-                      />
-                    </Dis>
-                  </Desc>
-                  <ButtonDiv>
-                    <Button bg onClick={() => handleSaveClick(text._id)}>
-                      Save
-                    </Button>
-                  </ButtonDiv>
-                </Card>
+                  </FromDataInput>
+                  <FromDataInput>
+                    <Laber>Add Note</Laber>
+                    <Textarea
+                      onChange={(e) => handleEditDescription(e)}
+                      name="description"
+                      type="text"
+                      placeholder="Type Here"
+                      defaultValue={text.description}
+                    />
+                  </FromDataInput>
+                </FromData>
+                <ButtonDiv2>
+                  <Button2 onClick={() => handleEditClick()}>Cancel</Button2>
+                  <Button2 onClick={() => handleSaveClick(text._id)} bg>
+                    Save
+                  </Button2>
+                </ButtonDiv2>
+              </Card>
               ) : (
                 <Card key={text._id}>
                   <NamePart>
@@ -266,6 +267,7 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
 const Textarea = styled.textarea`
   width: 95%;
   height: 150px;
