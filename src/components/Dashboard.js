@@ -10,8 +10,15 @@ import { linkToUser } from '../redux/ResetlinkApi'
 import { getUser } from '../redux/userApi'
 import { postLogoutUser } from '../redux/LoginApi'
 import { deleteText, postText, getTexts, editText } from '../redux/textApi'
-import { setdescriptionEdit, setToggle, setAddToggle, setAddname, setaddDescription, setIsEditing, setnameEdit } from '../redux/text'
-
+import {
+  setdescriptionEdit,
+  setToggle,
+  setAddToggle,
+  setAddname,
+  setaddDescription,
+  setIsEditing,
+  setnameEdit,
+} from '../redux/text'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -44,7 +51,7 @@ const Dashboard = () => {
     const editTextValues = { name: nameEdit, description: descriptionEdit }
     dispatch(editText(editTextValues, getResponse._id, textId))
     dispatch(setIsEditing(''))
-    alert("Edited successfully")
+    alert('Edited successfully')
     dispatch(getTexts(getResponse._id))
   }
 
@@ -116,7 +123,8 @@ const Dashboard = () => {
           <span>
             You have not verified your email address.{' '}
             <LinkMe onClick={() => handleResetLink()}> Click here</LinkMe>
-            to resend verification link or check your email for verification link
+            to resend verification link or check your email for verification
+            link
           </span>
         </Verify>
       ) : null}
@@ -143,36 +151,38 @@ const Dashboard = () => {
             getTextItems.map((text) =>
               isEditing === text._id ? (
                 <Card width height>
-                <TopHeader>Edit Item</TopHeader>
-                <FromData>
-                  <FromDataInput>
-                    <Laber>Name</Laber>
-                    <Input
-                      onChange={(e) => handleEditName(e)}
-                      name="name"
-                      type="text"
-                      placeholder="Input item name here"
-                      defaultValue={text.name}
-                    />
-                  </FromDataInput>
-                  <FromDataInput>
-                    <Laber>Add Note</Laber>
-                    <Textarea
-                      onChange={(e) => handleEditDescription(e)}
-                      name="description"
-                      type="text"
-                      placeholder="Type Here"
-                      defaultValue={text.description}
-                    />
-                  </FromDataInput>
-                </FromData>
-                <ButtonDiv2>
-                  <Button2 onClick={() => handleCancelClick()}>Cancel</Button2>
-                  <Button2 onClick={() => handleSaveClick(text._id)} bg>
-                    Save
-                  </Button2>
-                </ButtonDiv2>
-              </Card>
+                  <TopHeader>Edit Item</TopHeader>
+                  <FromData>
+                    <FromDataInput>
+                      <Laber>Name</Laber>
+                      <Input
+                        onChange={(e) => handleEditName(e)}
+                        name="name"
+                        type="text"
+                        placeholder="Input item name here"
+                        defaultValue={text.name}
+                      />
+                    </FromDataInput>
+                    <FromDataInput>
+                      <Laber>Add Note</Laber>
+                      <Textarea
+                        onChange={(e) => handleEditDescription(e)}
+                        name="description"
+                        type="text"
+                        placeholder="Type Here"
+                        defaultValue={text.description}
+                      />
+                    </FromDataInput>
+                  </FromData>
+                  <ButtonDiv2>
+                    <Button2 onClick={() => handleCancelClick()}>
+                      Cancel
+                    </Button2>
+                    <Button2 onClick={() => handleSaveClick(text._id)} bg>
+                      Save
+                    </Button2>
+                  </ButtonDiv2>
+                </Card>
               ) : (
                 <Card key={text._id}>
                   <NamePart>
@@ -188,7 +198,9 @@ const Dashboard = () => {
                   </Desc>
 
                   <ButtonDiv>
-                    <Button onClick={() => handleEditClick(text._id)}>Edit</Button>
+                    <Button onClick={() => handleEditClick(text._id)}>
+                      Edit
+                    </Button>
                     <Button bg onClick={() => handleDeleteText(text._id)}>
                       Delete
                     </Button>
