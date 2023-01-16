@@ -89,12 +89,14 @@ const Signup = () => {
       alert(error)
       window.location.reload()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [signedUpUser, error])
   console.log(error)
 
   const btnDisable =
     !/[0-9]/.test(passwordInput) ||
     !(passwordInput.length >= 8) ||
+    // eslint-disable-next-line no-useless-escape
     !/[A-Z]/.test(passwordInput) ||
     !/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passwordInput) ||
     wrongEmail || !emailInput || !FirstName || !lastName
@@ -198,6 +200,7 @@ const Signup = () => {
                     </li>
                     <li
                       style={{
+                        // eslint-disable-next-line no-useless-escape
                         color: /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(
                           passwordInput,
                         )
