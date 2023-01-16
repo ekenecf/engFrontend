@@ -62,6 +62,7 @@ export const editText = (textValues, userId, textId) => (dispatch) => {
     .patch(`https://wazobia.onrender.com/text/${userId}/${textId}`, textValues, config)
     .then((response) => {
       dispatch(createText(response))
+      console.log(response)
     })
     .catch((error) => {
       dispatch(setDataError(error))

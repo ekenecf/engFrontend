@@ -16,6 +16,7 @@ import { setAddname } from '../redux/text'
 import { setaddDescription } from '../redux/text'
 import { setIsEditing } from '../redux/text'
 import { setnameEdit } from '../redux/text'
+// import { getTexts } from '../redux/textApi'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -32,6 +33,7 @@ const Dashboard = () => {
     isEditing,
     nameEdit,
     descriptionEdit,
+    getText
   } = useSelector((state) => state.textReducer)
 
   function handleEditClick() {
@@ -50,11 +52,13 @@ const Dashboard = () => {
 
   function handleSaveClick(textId) {
     const editTextValues = { name: nameEdit, description: descriptionEdit }
-    console.log(editTextValues, getResponse._id, textId)
     dispatch(editText(editTextValues, getResponse._id, textId))
     dispatch(setIsEditing())
-    window.location.reload()
+    alert("Edited successfully")
+    dispatch(getTexts(getResponse._id))
+    // window.location.reload()
   }
+  console.log(getText)
 
   const handleName = (e) => {
     const name = e.target.value
@@ -105,7 +109,8 @@ const Dashboard = () => {
   const handleDeleteText = (id) => {
     dispatch(deleteText(getResponse._id, id))
     alert('Successfully deleted text')
-    window.location.reload()
+    dispatch(getTexts(getResponse._id))
+    // window.location.reload()
   }
 
   if (resetLink) {
@@ -119,7 +124,7 @@ const Dashboard = () => {
           <span>
             You have not verified your email address.{' '}
             <LinkMe onClick={() => handleResetLink()}> Click here</LinkMe>
-            to resend verification link.
+            to resend verification link or check your email for verification link
           </span>
         </Verify>
       ) : null}
