@@ -21,7 +21,7 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const getResponse = JSON.parse(localStorage.getItem('serverResponse'))
-  const getTextItems = JSON.parse(localStorage.getItem('getText'))
+  const getTextItems = JSON.parse(localStorage.getItem('getText')) || []
 
   const { resetLink } = useSelector((state) => state.resetReducer)
   const {
