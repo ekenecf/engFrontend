@@ -10,12 +10,8 @@ import { linkToUser } from '../redux/ResetlinkApi'
 import { getUser } from '../redux/userApi'
 import { postLogoutUser } from '../redux/LoginApi'
 import { deleteText, postText, getTexts, editText } from '../redux/textApi'
-import { setdescriptionEdit, setToggle } from '../redux/text'
-import { setAddToggle } from '../redux/text'
-import { setAddname } from '../redux/text'
-import { setaddDescription } from '../redux/text'
-import { setIsEditing } from '../redux/text'
-import { setnameEdit } from '../redux/text'
+import { setdescriptionEdit, setToggle, setAddToggle, setAddname, setaddDescription, setIsEditing, setnameEdit } from '../redux/text'
+
 
 const Dashboard = () => {
   const navigate = useNavigate()
