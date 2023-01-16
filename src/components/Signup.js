@@ -96,8 +96,8 @@ const Signup = () => {
   const btnDisable =
     !/[0-9]/.test(passwordInput) ||
     !(passwordInput.length >= 8) ||
-    // eslint-disable-next-line no-useless-escape
     !/[A-Z]/.test(passwordInput) ||
+    // eslint-disable-next-line no-useless-escape
     !/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passwordInput) ||
     wrongEmail || !emailInput || !FirstName || !lastName
 
