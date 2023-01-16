@@ -38,8 +38,9 @@ export const setaddDescription = (data) => ({
   type: ActionTypes.ADDDESCRIPTION,
   payload: data,
 })
-export const setIsEditing = () => ({
+export const setIsEditing = (data) => ({
   type: ActionTypes.TEXTEDIT,
+  payload: data,
 })
 export const setnameEdit = (data) => ({
   type: ActionTypes.NAMEEDIT,
@@ -56,7 +57,7 @@ const initialState = {
   addtoggle: '',
   addname: '',
   addDescription: '',
-  isEditing: false,
+  isEditing: [],
   nameEdit: '',
   descriptionEdit: '',
 }
@@ -106,7 +107,7 @@ const textReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.TEXTEDIT:
       return {
         ...state,
-        isEditing: !state.isEditing,
+        isEditing: payload,
       }
     default:
       return state

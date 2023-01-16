@@ -16,7 +16,6 @@ import { setAddname } from '../redux/text'
 import { setaddDescription } from '../redux/text'
 import { setIsEditing } from '../redux/text'
 import { setnameEdit } from '../redux/text'
-// import { getTexts } from '../redux/textApi'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -35,10 +34,6 @@ const Dashboard = () => {
     descriptionEdit,
   } = useSelector((state) => state.textReducer)
 
-  function handleEditClick() {
-    dispatch(setIsEditing())
-  }
-
   const handleEditName = (e) => {
     const editName = e.target.value
     dispatch(setnameEdit(editName))
@@ -52,9 +47,16 @@ const Dashboard = () => {
   function handleSaveClick(textId) {
     const editTextValues = { name: nameEdit, description: descriptionEdit }
     dispatch(editText(editTextValues, getResponse._id, textId))
-    dispatch(setIsEditing())
+    dispatch(setIsEditing(''))
     alert("Edited successfully")
     dispatch(getTexts(getResponse._id))
+  }
+
+  function handleEditClick(textId) {
+    dispatch(setIsEditing(textId))
+  }
+  function handleCancelClick() {
+    dispatch(setIsEditing(''))
   }
 
   const handleName = (e) => {
@@ -139,12 +141,11 @@ const Dashboard = () => {
           ''
         )}
       </Header>
-
       <MainBody>
         <CardBodyMain>
           {getTextItems.length ? (
             getTextItems.map((text) =>
-              isEditing ? (
+              isEditing === text._id ? (
                 <Card width height>
                 <TopHeader>Edit Item</TopHeader>
                 <FromData>
@@ -170,7 +171,7 @@ const Dashboard = () => {
                   </FromDataInput>
                 </FromData>
                 <ButtonDiv2>
-                  <Button2 onClick={() => handleEditClick()}>Cancel</Button2>
+                  <Button2 onClick={() => handleCancelClick()}>Cancel</Button2>
                   <Button2 onClick={() => handleSaveClick(text._id)} bg>
                     Save
                   </Button2>
@@ -191,7 +192,7 @@ const Dashboard = () => {
                   </Desc>
 
                   <ButtonDiv>
-                    <Button onClick={() => handleEditClick()}>Edit</Button>
+                    <Button onClick={() => handleEditClick(text._id)}>Edit</Button>
                     <Button bg onClick={() => handleDeleteText(text._id)}>
                       Delete
                     </Button>
