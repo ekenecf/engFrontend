@@ -79,7 +79,7 @@ const Signup = () => {
   console.log(wrongEmail)
 
   useEffect(() => {
-    if (signedUpUser._id) {
+    if (signedUpUser._id && signedUpUser.loggedIn) {
       Navigate(`/dashboard/${signedUpUser._id}`)
       window.location.reload()
     } else {
@@ -89,7 +89,7 @@ const Signup = () => {
       alert(error)
       window.location.reload()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     // eslint-disable-next-line
   }, [signedUpUser, error])
   console.log(error)
 
@@ -221,15 +221,17 @@ const Signup = () => {
               disabled={btnDisable}
               style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
             >
+              Sign Up
               {loading ? (
                 <SpinnerCircular
+                  style={{ position: 'absolute', right: '20px' }}
                   size={25}
                   thickness={91}
                   speed={100}
                   color="rgba(57, 114, 172, 1)"
                   secondaryColor="rgba(0, 0, 0, 0.44)"
                 />
-              ) : 'Sign Up'}
+              ) : null}
             </Button>
           </FormData>
         </CardBody>
@@ -250,6 +252,7 @@ const Button = style.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  position:relative
 `
 const PasswordInfo = style.div`
 ul {

@@ -3,7 +3,6 @@ import style from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { SpinnerCircular } from 'spinners-react'
-// import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { setemailInput, setWrongEmail } from '../redux/signUp'
@@ -56,7 +55,6 @@ const Signup = () => {
 
   return (
     <Maincontainer>
-      {/* <ToastContainer /> */}
       <CardBodyWrapper>
         <CardBody>
           <Header>

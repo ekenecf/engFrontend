@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { setLoadingData, setDataError, setForgotPassword } from './ForgotPassword'
 
-const USERURL = 'http://127.0.0.1:8080/users/forgotPassword'
+const USERURL = 'https://wazobia.onrender.com/users/forgotPassword'
 
 export const postForgotPassword = (userDetail) => (dispatch) => {
   dispatch(setLoadingData())
