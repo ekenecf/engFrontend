@@ -124,7 +124,6 @@ const Login = () => {
                 />
               </PasswordIcon>
             </PasswordInput>
-
             <Button
               type="submit"
               disabled={btnDisable}
@@ -141,6 +140,20 @@ const Login = () => {
               ) : 'Login'}
             </Button>
           </FormData>
+          <HeaderLink>
+              <span>
+                {' '}
+                <Link
+                  to="/forgotpassword"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'rgba(0, 76, 189, 1)',
+                  }}
+                >
+                  forgotpassword?
+                </Link>{' '}
+              </span>
+            </HeaderLink>
         </CardBody>
       </CardBodyWrapper>
     </Maincontainer>
