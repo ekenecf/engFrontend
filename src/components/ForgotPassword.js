@@ -3,6 +3,7 @@ import style from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { SpinnerCircular } from 'spinners-react'
+// import 'react-toastify/dist/ReactToastify.css'
 
 import { setemailInput, setWrongEmail } from '../redux/signUp'
 import { postForgotPassword } from '../redux/ForgotPasswordApi'
