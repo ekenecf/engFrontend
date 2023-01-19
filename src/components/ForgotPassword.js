@@ -42,28 +42,13 @@ const ForgotPassword = () => {
 
   if (error) {
     alert(error);
-    // window.location.reload()
+    window.location.reload()
   }
   if (forgotPassword) {
     alert(forgotPassword);
     window.location.reload();
     Navigate("/");
   }
-  //   const timer = setTimeout(() => setToggle(!toggle), 17000);
-  //   return () => clearTimeout(timer);
-
-  //   useEffect(() => {
-  //     if(error) {
-  //         alert(error)
-  //         Navigate('/forgotpassword')
-  //       }
-  //       if(forgotPassword) {
-  //         alert(forgotPassword)
-  //         Navigate('/')
-  //       }
-  //       // eslint-disable-next-line react-hooks/exhaustive-deps
-  //     }, [])
-  console.log("Error or Forgorpass-success", error, forgotPassword);
 
   const btnDisable = wrongEmail || !emailInput;
 
