@@ -1,57 +1,71 @@
-import React, { useEffect } from 'react'
-import style from 'styled-components'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { SpinnerCircular } from 'spinners-react'
-import 'react-toastify/dist/ReactToastify.css'
+import React from "react";
+import style from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { SpinnerCircular } from "spinners-react";
 
-import { setemailInput, setWrongEmail } from '../redux/signUp'
-import { postForgotPassword } from '../redux/ForgotPasswordApi'
+import { setemailInput, setWrongEmail } from "../redux/signUp";
+import { postForgotPassword } from "../redux/ForgotPasswordApi";
 
-const Signup = () => {
-  const dispatch = useDispatch()
-  const Navigate = useNavigate()
+const ForgotPassword = () => {
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
-  const { wrongEmail, emailInput } = useSelector((state) => state.signUpReducer)
+  const { wrongEmail, emailInput } = useSelector(
+    (state) => state.signUpReducer
+  );
 
   const { loading, error, forgotPassword } = useSelector(
-    (state) => state.forgotPasswordReducer,
-  )
+    (state) => state.forgotPasswordReducer
+  );
 
   const handleEmail = (e) => {
-    const email = e.target.value
+    const email = e.target.value;
     if (email.length > 0) {
-      dispatch(setemailInput(email))
+      dispatch(setemailInput(email));
     }
     if (/@/.test(email) || email.length === 0) {
-      return dispatch(setWrongEmail(false))
+      return dispatch(setWrongEmail(false));
     } else {
-      return dispatch(setWrongEmail(true))
+      return dispatch(setWrongEmail(true));
     }
-  }
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const userDetail = {
       email: emailInput,
-    }
-    console.log(userDetail)
-    dispatch(postForgotPassword(userDetail))
-}
+    };
+    console.log(userDetail);
+    dispatch(postForgotPassword(userDetail));
+  };
 
-  if(error) {
-    alert(error)
-    window.location.reload()
+  if (error) {
+    alert(error);
+    // window.location.reload()
   }
-  if(forgotPassword) {
-    alert(forgotPassword)
-    window.location.reload()
-    Navigate('/')
+  if (forgotPassword) {
+    alert(forgotPassword);
+    window.location.reload();
+    Navigate("/");
   }
+  //   const timer = setTimeout(() => setToggle(!toggle), 17000);
+  //   return () => clearTimeout(timer);
 
-  console.log('Error or Forgorpass-success', error, forgotPassword)
+  //   useEffect(() => {
+  //     if(error) {
+  //         alert(error)
+  //         Navigate('/forgotpassword')
+  //       }
+  //       if(forgotPassword) {
+  //         alert(forgotPassword)
+  //         Navigate('/')
+  //       }
+  //       // eslint-disable-next-line react-hooks/exhaustive-deps
+  //     }, [])
+  console.log("Error or Forgorpass-success", error, forgotPassword);
 
-  const btnDisable = wrongEmail || !emailInput
+  const btnDisable = wrongEmail || !emailInput;
 
   return (
     <Maincontainer>
@@ -60,17 +74,17 @@ const Signup = () => {
           <Header>
             <HeaderText>Forgot Password</HeaderText>
             <HeaderLink>
-              Back to{' '}
+              Back to{" "}
               <span>
-                {' '}
+                {" "}
                 <Link
                   to="/"
                   style={{
-                    textDecoration: 'none',
-                    color: 'rgba(0, 76, 189, 1)',
+                    textDecoration: "none",
+                    color: "rgba(0, 76, 189, 1)",
                   }}
                 >
-                  {' '}
+                  {" "}
                   Log in
                 </Link>
               </span>
@@ -84,17 +98,17 @@ const Signup = () => {
                 type="email"
                 placeholder="Input email"
               />
-              {wrongEmail ? <span>Wrong email format!</span> : ''}
+              {wrongEmail ? <span>Wrong email format!</span> : ""}
             </EmailInput>
             <Button
               type="submit"
               disabled={btnDisable}
-              style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
+              style={{ background: btnDisable ? "#B7BCC3" : "#555658" }}
             >
               Send Link
               {loading ? (
                 <SpinnerCircular
-                  style={{ position: 'absolute', right: '20px' }}
+                  style={{ position: "absolute", right: "20px" }}
                   size={25}
                   thickness={91}
                   speed={100}
@@ -107,9 +121,9 @@ const Signup = () => {
         </CardBody>
       </CardBodyWrapper>
     </Maincontainer>
-  )
-}
-export default Signup
+  );
+};
+export default ForgotPassword;
 
 const Button = style.button`
   width: 102%;
@@ -123,7 +137,7 @@ const Button = style.button`
   align-items: center;
   justify-content: center;
   position:relative
-`
+`;
 const EmailInput = style.div`
   width: 100%;
   margin-bottom: 3%;
@@ -135,7 +149,7 @@ const EmailInput = style.div`
   line-height: 15px;
   color: #F41E10;
   }
-`
+`;
 const Input = style.input`
   width: 100%;
   height: 30px;
@@ -144,7 +158,7 @@ const Input = style.input`
   border:  1px solid lightgray;
   padding-left: 10px;
   margin: 1% 0px;
-`
+`;
 const Label = style.div`
   font-family: sans-serif;
   font-style: normal;
@@ -152,10 +166,10 @@ const Label = style.div`
   font-size: 14px;
   line-height: 17px;
   color: #1A1A1A;
-`
+`;
 const FormData = style.form`
   width: 100%
-`
+`;
 const HeaderLink = style.div`
   ont-family: 'Montserrat';
   ont-style: normal;
@@ -167,7 +181,7 @@ const HeaderLink = style.div`
     color: rgba(0, 76, 189, 1);
     cursor: pointer;
   }
-`
+`;
 const HeaderText = style.div`
   margin-top: 3%;
   width: 230px;
@@ -179,14 +193,14 @@ const HeaderText = style.div`
   line-height: 29px;
   color: #000000;
   text-align: center;
-`
+`;
 const Header = style.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`
+`;
 const Maincontainer = style.div`
     width: 100%;
     height: 100vh;
@@ -194,7 +208,7 @@ const Maincontainer = style.div`
     justify-content: center;
     align-items: center;
     background: #FAFAFA;
-`
+`;
 const CardBodyWrapper = style.div`
   width: 50%;
   height: max-content;
@@ -204,8 +218,8 @@ const CardBodyWrapper = style.div`
 -moz-box-shadow: 2px 2px 5px -6px rgba(0,0,0,0.69);
 display: flex;
 justify-content: center;
-`
+`;
 const CardBody = style.div`
   width: 80%;
   height: 90%;
-`
+`;

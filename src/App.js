@@ -7,6 +7,7 @@ import Signup from './components/Signup'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import Verify from './components/Verify'
+import ForgotPassword from './components/ForgotPassword'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Signup" element={<Signup />} />
           <Route path="/dashboard/:userId" element={<Dashboard />} />
           <Route path="/users/verifyuser/:id" element={<Verify />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Routes>
       </Router>
     </Provider>
