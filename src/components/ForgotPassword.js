@@ -1,47 +1,27 @@
 import React, { useEffect } from 'react'
 import style from 'styled-components'
-import { AiOutlineEye } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
-import { SpinnerCircular } from 'spinners-react'
 import { useDispatch, useSelector } from 'react-redux'
+import { SpinnerCircular } from 'spinners-react'
+import 'react-toastify/dist/ReactToastify.css'
 
-import { postLoginUser } from '../redux/LoginApi'
-import {
-  setPasswordShow,
-  setWrongEmail,
-  setemailInput,
-  setpasswordInput,
-} from '../redux/Login'
+import { setemailInput, setWrongEmail } from '../redux/signUp'
+import { postForgotPassword } from '../redux/ForgotPasswordApi'
 
-const Login = () => {
+const Signup = () => {
   const dispatch = useDispatch()
   const Navigate = useNavigate()
 
-  const {
-    loading,
-    error,
-    addedUser,
-    passwordShow,
-    wrongEmail,
-    emailInput,
-    passwordInput,
-  } = useSelector((state) => state.logInReducer)
+  const { wrongEmail, emailInput } = useSelector((state) => state.signUpReducer)
 
-  const showPassword = () => {
-    dispatch(setPasswordShow())
-  }
-
-  const handlePassword = (e) => {
-    const password = e.target.value
-    if (password.length > 0) {
-      dispatch(setpasswordInput(password))
-    }
-  }
+  const { loading, error, forgotPassword } = useSelector(
+    (state) => state.forgotPasswordReducer,
+  )
 
   const handleEmail = (e) => {
     const email = e.target.value
     if (email.length > 0) {
-      dispatch(setemailInput( email))
+      dispatch(setemailInput(email))
     }
     if (/@/.test(email) || email.length === 0) {
       return dispatch(setWrongEmail(false))
@@ -52,93 +32,76 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const userDetail = { email: emailInput, password: passwordInput }
-    dispatch(postLoginUser(userDetail))
+    const userDetail = {
+      email: emailInput,
+    }
+    console.log(userDetail)
+    dispatch(postForgotPassword(userDetail))
+}
+
+  if(error) {
+    alert(error)
+    window.location.reload()
+  }
+  if(forgotPassword) {
+    alert(forgotPassword)
+    window.location.reload()
+    Navigate('/')
   }
 
-  useEffect(() => {
-    if (addedUser._id && addedUser.loggedIn) {
-      Navigate(`/dashboard/${addedUser._id}`)
-      window.location.reload()
-    } else {
-      Navigate('/')
-    }
-    if (error.length > 0) {
-      alert(error)
-      window.location.reload()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addedUser, error])
+  console.log('Error or Forgorpass-success', error, forgotPassword)
 
-  const btnDisable = wrongEmail || !passwordInput
-
+  const btnDisable = wrongEmail || !emailInput
 
   return (
     <Maincontainer>
       <CardBodyWrapper>
         <CardBody>
           <Header>
-            <HeaderText>Log in</HeaderText>
+            <HeaderText>Forgot Password</HeaderText>
             <HeaderLink>
-              If you have no account,{' '}
+              Back to{' '}
               <span>
                 {' '}
                 <Link
-                  to="/signup"
+                  to="/"
                   style={{
                     textDecoration: 'none',
                     color: 'rgba(0, 76, 189, 1)',
                   }}
                 >
-                  Sign up
-                </Link>{' '}
+                  {' '}
+                  Log in
+                </Link>
               </span>
             </HeaderLink>
           </Header>
           <FormData onSubmit={(e) => handleSubmit(e)}>
             <EmailInput>
-              <Laber>Email Address</Laber>
+              <Label>Email Address</Label>
               <Input
                 onChange={(e) => handleEmail(e)}
                 type="email"
-                placeholder="Type Here"
+                placeholder="Input email"
               />
               {wrongEmail ? <span>Wrong email format!</span> : ''}
             </EmailInput>
-            <PasswordInput>
-              <Laber>Password</Laber>
-              <PasswordIcon>
-                <Input2
-                  type={passwordShow ? 'text' : 'password'}
-                  placeholder="Type Here"
-                  name="password"
-                  onChange={(e) => handlePassword(e)}
-                />
-                <AiOutlineEye
-                  style={{
-                    fontSize: '20px',
-                    cursor: 'pointer',
-                    marginLeft: '10px',
-                  }}
-                  onClick={showPassword}
-                />
-              </PasswordIcon>
-            </PasswordInput>
-
             <Button
               type="submit"
               disabled={btnDisable}
               style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
             >
+              Send Link
               {loading ? (
                 <SpinnerCircular
+                  style={{ position: 'absolute', right: '20px' }}
                   size={25}
                   thickness={91}
                   speed={100}
                   color="rgba(57, 114, 172, 1)"
                   secondaryColor="rgba(0, 0, 0, 0.44)"
                 />
-              ) : 'Login'}
+              ) : null}
             </Button>
           </FormData>
         </CardBody>
@@ -146,13 +109,11 @@ const Login = () => {
     </Maincontainer>
   )
 }
-
-export default Login
+export default Signup
 
 const Button = style.button`
   width: 102%;
   height: 40px;
-  background: #B7BCC3;
   border-radius: 4px;
   border: none;
   cursor: pointer;
@@ -161,24 +122,11 @@ const Button = style.button`
   display: flex;
   align-items: center;
   justify-content: center;
-`
-
-const PasswordIcon = style.div`
-  width: 100%
-  height: 30px;
-  border:  1px solid lightgray;
-  border-radius: 5px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-`
-const PasswordInput = style.div`
-  width: 102%;
+  position:relative
 `
 const EmailInput = style.div`
-    margin-top: 3%;
-    width: 100%;
-    margin-bottom: 3%;
+  width: 100%;
+  margin-bottom: 3%;
   span{
   font-family: sans-serif;
   font-style: normal;
@@ -187,14 +135,6 @@ const EmailInput = style.div`
   line-height: 15px;
   color: #F41E10;
   }
-`
-const Input2 = style.input`
-  width: 90%;
-  height: 30px;
-  border-radius: 4px;
-  outline: none;
-  border: none;
-  padding-left: 10px;
 `
 const Input = style.input`
   width: 100%;
@@ -205,7 +145,7 @@ const Input = style.input`
   padding-left: 10px;
   margin: 1% 0px;
 `
-const Laber = style.div`
+const Label = style.div`
   font-family: sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -247,7 +187,6 @@ const Header = style.div`
   align-items: center;
   flex-direction: column;
 `
-
 const Maincontainer = style.div`
     width: 100%;
     height: 100vh;
@@ -256,7 +195,6 @@ const Maincontainer = style.div`
     align-items: center;
     background: #FAFAFA;
 `
-
 const CardBodyWrapper = style.div`
   width: 50%;
   height: max-content;
@@ -266,12 +204,7 @@ const CardBodyWrapper = style.div`
 -moz-box-shadow: 2px 2px 5px -6px rgba(0,0,0,0.69);
 display: flex;
 justify-content: center;
-
-@media screen and (max-width: 768px) {
-
-}
 `
-
 const CardBody = style.div`
   width: 80%;
   height: 90%;
