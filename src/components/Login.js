@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react'
-import style from 'styled-components'
-import { AiOutlineEye } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
-import { SpinnerCircular } from 'spinners-react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from "react";
+import style from "styled-components";
+import { AiOutlineEye } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { SpinnerCircular } from "spinners-react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { postLoginUser } from '../redux/LoginApi'
+import { postLoginUser } from "../redux/LoginApi";
 import {
   setPasswordShow,
   setWrongEmail,
   setemailInput,
   setpasswordInput,
-} from '../redux/Login'
+} from "../redux/Login";
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const Navigate = useNavigate()
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
   const {
     loading,
@@ -25,53 +25,52 @@ const Login = () => {
     wrongEmail,
     emailInput,
     passwordInput,
-  } = useSelector((state) => state.logInReducer)
+  } = useSelector((state) => state.logInReducer);
 
   const showPassword = () => {
-    dispatch(setPasswordShow())
-  }
+    dispatch(setPasswordShow());
+  };
 
   const handlePassword = (e) => {
-    const password = e.target.value
+    const password = e.target.value;
     if (password.length > 0) {
-      dispatch(setpasswordInput(password))
+      dispatch(setpasswordInput(password));
     }
-  }
+  };
 
   const handleEmail = (e) => {
-    const email = e.target.value
+    const email = e.target.value;
     if (email.length > 0) {
-      dispatch(setemailInput( email))
+      dispatch(setemailInput(email));
     }
     if (/@/.test(email) || email.length === 0) {
-      return dispatch(setWrongEmail(false))
+      return dispatch(setWrongEmail(false));
     } else {
-      return dispatch(setWrongEmail(true))
+      return dispatch(setWrongEmail(true));
     }
-  }
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const userDetail = { email: emailInput, password: passwordInput }
-    dispatch(postLoginUser(userDetail))
-  }
+    e.preventDefault();
+    const userDetail = { email: emailInput, password: passwordInput };
+    dispatch(postLoginUser(userDetail));
+  };
 
   useEffect(() => {
     if (addedUser._id && addedUser.loggedIn) {
-      Navigate(`/dashboard/${addedUser._id}`)
-      window.location.reload()
+      Navigate(`/dashboard/${addedUser._id}`);
+      window.location.reload();
     } else {
-      Navigate('/')
+      Navigate("/");
     }
     if (error.length > 0) {
-      alert(error)
-      window.location.reload()
+      alert(error);
+      window.location.reload();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addedUser, error])
+  }, [addedUser, error]);
 
-  const btnDisable = wrongEmail || !passwordInput
-
+  const btnDisable = wrongEmail || !passwordInput;
 
   return (
     <Maincontainer>
@@ -80,18 +79,18 @@ const Login = () => {
           <Header>
             <HeaderText>Log in</HeaderText>
             <HeaderLink>
-              If you have no account,{' '}
+              If you have no account,{" "}
               <span>
-                {' '}
+                {" "}
                 <Link
                   to="/signup"
                   style={{
-                    textDecoration: 'none',
-                    color: 'rgba(0, 76, 189, 1)',
+                    textDecoration: "none",
+                    color: "rgba(0, 76, 189, 1)",
                   }}
                 >
                   Sign up
-                </Link>{' '}
+                </Link>{" "}
               </span>
             </HeaderLink>
           </Header>
@@ -103,22 +102,22 @@ const Login = () => {
                 type="email"
                 placeholder="Type Here"
               />
-              {wrongEmail ? <span>Wrong email format!</span> : ''}
+              {wrongEmail ? <span>Wrong email format!</span> : ""}
             </EmailInput>
             <PasswordInput>
               <Laber>Password</Laber>
               <PasswordIcon>
                 <Input2
-                  type={passwordShow ? 'text' : 'password'}
+                  type={passwordShow ? "text" : "password"}
                   placeholder="Type Here"
                   name="password"
                   onChange={(e) => handlePassword(e)}
                 />
                 <AiOutlineEye
                   style={{
-                    fontSize: '20px',
-                    cursor: 'pointer',
-                    marginLeft: '10px',
+                    fontSize: "20px",
+                    cursor: "pointer",
+                    marginLeft: "10px",
                   }}
                   onClick={showPassword}
                 />
@@ -127,7 +126,7 @@ const Login = () => {
             <Button
               type="submit"
               disabled={btnDisable}
-              style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
+              style={{ background: btnDisable ? "#B7BCC3" : "#555658" }}
             >
               {loading ? (
                 <SpinnerCircular
@@ -137,30 +136,32 @@ const Login = () => {
                   color="rgba(57, 114, 172, 1)"
                   secondaryColor="rgba(0, 0, 0, 0.44)"
                 />
-              ) : 'Login'}
+              ) : (
+                "Login"
+              )}
             </Button>
           </FormData>
           <HeaderLink>
-              <span>
-                {' '}
-                <Link
-                  to="/forgotpassword"
-                  style={{
-                    textDecoration: 'none',
-                    color: 'rgba(0, 76, 189, 1)',
-                  }}
-                >
-                  forgotpassword?
-                </Link>{' '}
-              </span>
-            </HeaderLink>
+            <span>
+              {" "}
+              <Link
+                to="/forgotpassword"
+                style={{
+                  textDecoration: "none",
+                  color: "rgba(0, 76, 189, 1)",
+                }}
+              >
+                forgotpassword?
+              </Link>{" "}
+            </span>
+          </HeaderLink>
         </CardBody>
       </CardBodyWrapper>
     </Maincontainer>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 
 const Button = style.button`
   width: 102%;
@@ -174,7 +175,7 @@ const Button = style.button`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const PasswordIcon = style.div`
   width: 100%
@@ -184,10 +185,10 @@ const PasswordIcon = style.div`
   background: #fff;
   display: flex;
   align-items: center;
-`
+`;
 const PasswordInput = style.div`
   width: 102%;
-`
+`;
 const EmailInput = style.div`
     margin-top: 3%;
     width: 100%;
@@ -200,7 +201,7 @@ const EmailInput = style.div`
   line-height: 15px;
   color: #F41E10;
   }
-`
+`;
 const Input2 = style.input`
   width: 90%;
   height: 30px;
@@ -208,7 +209,7 @@ const Input2 = style.input`
   outline: none;
   border: none;
   padding-left: 10px;
-`
+`;
 const Input = style.input`
   width: 100%;
   height: 30px;
@@ -217,7 +218,7 @@ const Input = style.input`
   border:  1px solid lightgray;
   padding-left: 10px;
   margin: 1% 0px;
-`
+`;
 const Laber = style.div`
   font-family: sans-serif;
   font-style: normal;
@@ -225,10 +226,10 @@ const Laber = style.div`
   font-size: 14px;
   line-height: 17px;
   color: #1A1A1A;
-`
+`;
 const FormData = style.form`
   width: 100%
-`
+`;
 const HeaderLink = style.div`
   ont-family: 'Montserrat';
   ont-style: normal;
@@ -240,7 +241,7 @@ const HeaderLink = style.div`
     color: rgba(0, 76, 189, 1);
     cursor: pointer;
   }
-`
+`;
 const HeaderText = style.div`
   margin-top: 3%;
   width: 230px;
@@ -252,14 +253,14 @@ const HeaderText = style.div`
   line-height: 29px;
   color: #000000;
   text-align: center;
-`
+`;
 const Header = style.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`
+`;
 
 const Maincontainer = style.div`
     width: 100%;
@@ -268,7 +269,7 @@ const Maincontainer = style.div`
     justify-content: center;
     align-items: center;
     background: #FAFAFA;
-`
+`;
 
 const CardBodyWrapper = style.div`
   width: 50%;
@@ -283,9 +284,9 @@ justify-content: center;
 @media screen and (max-width: 768px) {
 
 }
-`
+`;
 
 const CardBody = style.div`
   width: 80%;
   height: 90%;
-`
+`;
