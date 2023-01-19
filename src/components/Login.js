@@ -57,7 +57,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (addedUser._id) {
+    if (addedUser._id && addedUser.loggedIn) {
       Navigate(`/dashboard/${addedUser._id}`)
       window.location.reload()
     } else {
