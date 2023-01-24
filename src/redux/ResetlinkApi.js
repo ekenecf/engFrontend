@@ -11,9 +11,9 @@ export const linkToUser = (id) => (dispatch) => {
     .post(`https://wazobia.onrender.com/auth/resendLink/${id}`, config)
     .then((response) => {
       dispatch(setResetLink())
+      console.log(response)
     })
     .catch((error) => {
       dispatch(setDataError(error))
-      console.log('Catch error', error)
     })
 }

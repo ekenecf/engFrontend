@@ -1,6 +1,5 @@
-// Create actions and reducers
 export const ActionTypes = {
-    GETUSER: 'GETUSER',
+  GETUSER: 'GETUSER',
   GETERROR: 'GETERROR',
 }
 

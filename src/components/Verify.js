@@ -19,8 +19,8 @@ const Verify = () => {
    </Maincontainer>
   )
 }
-
 export default Verify
+
 const Back = styled.div`
   font-size: 15px;
   color: blue;

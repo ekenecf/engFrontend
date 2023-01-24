@@ -8,6 +8,7 @@ import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import Verify from './components/Verify'
 import ForgotPassword from './components/ForgotPassword'
+import NewPassword from './components/NewPassword'
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
           <Route path="/dashboard/:userId" element={<Dashboard />} />
           <Route path="/users/verifyuser/:id" element={<Verify />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route
+            path="/users/resetpassword/:resetToken"
+            element={<NewPassword />}
+          />
         </Routes>
       </Router>
     </Provider>

@@ -14,7 +14,7 @@ export const signUpUser = (userDetail) => (dispatch) => {
     .post(USERURL, userDetail, config)
     .then((response) => {
       dispatch(setsignUp(response.data.data))
-      localStorage.setItem('serverResponse', JSON.stringify(response.data.data));
+      localStorage.setItem('serverResponse', JSON.stringify(response.data.data))
     })
     .catch((error) => {
       dispatch(setsignUpDataError(error.response.data.message.Message))
