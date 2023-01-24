@@ -114,6 +114,7 @@ const Dashboard = () => {
 
   if (resetLink) {
     alert('Sent successfully')
+    window.location.reload()
   }
 
   return (
