@@ -14,8 +14,8 @@ export const postLoginUser = (userDetail) => (dispatch) => {
     .post(USERURL, userDetail, config)
     .then((response) => {
       dispatch(setCreateUser(response.data.data))
-      localStorage.setItem('serverResponse', JSON.stringify(response.data.data));
-      localStorage.setItem('getText', JSON.stringify(response.data.data.text));
+      localStorage.setItem('serverResponse', JSON.stringify(response.data.data))
+      localStorage.setItem('getText', JSON.stringify(response.data.data.text))
     })
     .catch((error) => {
       dispatch(setDataError(error.response.data.message))
@@ -36,6 +36,5 @@ export const postLogoutUser = (id) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(setDataError(error.response.data.message))
-      console.log('Catch error', error)
     })
 }

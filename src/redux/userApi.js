@@ -14,6 +14,5 @@ export const getUser = (id) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(setDataError(error))
-      console.log('Catch error', error)
     })
 }

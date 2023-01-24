@@ -20,7 +20,10 @@ function App() {
           <Route path="/dashboard/:userId" element={<Dashboard />} />
           <Route path="/users/verifyuser/:id" element={<Verify />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/users/resetpassword/:resetToken" element={<NewPassword />} />
+          <Route
+            path="/users/resetpassword/:resetToken"
+            element={<NewPassword />}
+          />
         </Routes>
       </Router>
     </Provider>

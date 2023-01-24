@@ -89,7 +89,7 @@ const Signup = () => {
       alert(error)
       window.location.reload()
     }
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [signedUpUser, error])
   console.log(error)
 
@@ -99,7 +99,10 @@ const Signup = () => {
     !/[A-Z]/.test(passwordInput) ||
     // eslint-disable-next-line no-useless-escape
     !/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passwordInput) ||
-    wrongEmail || !emailInput || !FirstName || !lastName
+    wrongEmail ||
+    !emailInput ||
+    !FirstName ||
+    !lastName
 
   return (
     <Maincontainer>
@@ -221,7 +224,6 @@ const Signup = () => {
               disabled={btnDisable}
               style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
             >
-              
               {loading ? (
                 <SpinnerCircular
                   size={25}
@@ -230,7 +232,9 @@ const Signup = () => {
                   color="rgba(57, 114, 172, 1)"
                   secondaryColor="rgba(0, 0, 0, 0.44)"
                 />
-              ) : 'Sign Up'}
+              ) : (
+                'Sign Up'
+              )}
             </Button>
           </FormData>
         </CardBody>

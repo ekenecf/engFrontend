@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   userReducer,
   textReducer,
   forgotPasswordReducer,
-  newPasswordReducer
+  newPasswordReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger))

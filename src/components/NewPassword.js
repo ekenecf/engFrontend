@@ -19,16 +19,13 @@ const NewPassword = () => {
 
   const { resetToken } = params
 
-  const {
-    wrongPassword,
-    passwordShow,
-    passwordInput,
-  } = useSelector((state) => state.signUpReducer)
+  const { wrongPassword, passwordShow, passwordInput } = useSelector(
+    (state) => state.signUpReducer,
+  )
 
-  const {
-    loading1,
-    passwordInput1,
-  } = useSelector((state) => state.newPasswordReducer)
+  const { loading1, passwordInput1 } = useSelector(
+    (state) => state.newPasswordReducer,
+  )
 
   const showPassword = () => {
     dispatch(setPasswordShow())
@@ -51,8 +48,8 @@ const NewPassword = () => {
     dispatch(postResetPassword(userDetail, resetToken))
   }
 
-  if(passwordInput1) {
-    alert("Successfully Updated password")
+  if (passwordInput1) {
+    alert('Successfully Updated password')
     window.location.reload()
     Navigate('/')
   }
@@ -146,7 +143,9 @@ const NewPassword = () => {
                   color="rgba(57, 114, 172, 1)"
                   secondaryColor="rgba(0, 0, 0, 0.44)"
                 />
-              ) : 'Reset Password'}
+              ) : (
+                'Reset Password'
+              )}
             </Button>
           </FormData>
         </CardBody>
