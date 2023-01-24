@@ -2,15 +2,16 @@ import {
   combineReducers,
   legacy_createStore as createStore,
   applyMiddleware,
-} from "redux";
-import thunk from "redux-thunk";
-import logger from "redux-logger";
-import logInReducer from "./Login";
-import signUpReducer from "./signUp";
-import resetReducer from "./Resetlink";
-import userReducer from "./user";
-import textReducer from "./text";
-import forgotPasswordReducer from "./ForgotPassword";
+} from 'redux'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
+import logInReducer from './Login'
+import signUpReducer from './signUp'
+import resetReducer from './Resetlink'
+import userReducer from './user'
+import textReducer from './text'
+import forgotPasswordReducer from './ForgotPassword'
+import newPasswordReducer from './NewPassword'
 
 const rootReducer = combineReducers({
   logInReducer,
@@ -19,8 +20,9 @@ const rootReducer = combineReducers({
   userReducer,
   textReducer,
   forgotPasswordReducer,
-});
+  newPasswordReducer
+})
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+const store = createStore(rootReducer, applyMiddleware(thunk, logger))
 
-export default store;
+export default store

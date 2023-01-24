@@ -1,37 +1,34 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import style from 'styled-components'
 import { AiOutlineEye } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { SpinnerCircular } from 'spinners-react'
 
-import { signUpUser } from '../redux/signUpApi'
 import {
-  setemailInput,
-  setWrongEmail,
-  setFirstName,
-  setlastName,
   setWrongPassword,
   setPasswordShow,
   setpasswordInput,
 } from '../redux/signUp'
+import { postResetPassword } from '../redux/NewPasswordApi'
 
-const Signup = () => {
+const NewPassword = () => {
   const dispatch = useDispatch()
   const Navigate = useNavigate()
+  const params = useParams()
+
+  const { resetToken } = params
 
   const {
-    loading,
-    error,
-    signedUpUser,
-    wrongEmail,
-    emailInput,
-    FirstName,
-    lastName,
     wrongPassword,
     passwordShow,
     passwordInput,
   } = useSelector((state) => state.signUpReducer)
+
+  const {
+    loading1,
+    passwordInput1,
+  } = useSelector((state) => state.newPasswordReducer)
 
   const showPassword = () => {
     dispatch(setPasswordShow())
@@ -46,118 +43,38 @@ const Signup = () => {
     return dispatch(setWrongPassword(false))
   }
 
-  const handleEmail = (e) => {
-    const email = e.target.value
-    if (email.length > 0) {
-      dispatch(setemailInput(email))
-    }
-    if (/@/.test(email) || email.length === 0) {
-      return dispatch(setWrongEmail(false))
-    } else {
-      return dispatch(setWrongEmail(true))
-    }
-  }
-  const handleLastName = (e) => {
-    const lastName = e.target.value
-    dispatch(setlastName(lastName))
-  }
-  const handleFirstName = (e) => {
-    const firstName = e.target.value
-    dispatch(setFirstName(firstName))
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     const userDetail = {
-      email: emailInput,
       password: passwordInput,
-      firstName: FirstName,
-      lastName,
     }
-    dispatch(signUpUser(userDetail))
+    dispatch(postResetPassword(userDetail, resetToken))
   }
-  console.log(wrongEmail)
 
-  useEffect(() => {
-    if (signedUpUser._id && signedUpUser.loggedIn) {
-      Navigate(`/dashboard/${signedUpUser._id}`)
-      window.location.reload()
-    } else {
-      Navigate('/signup')
-    }
-    if (error.length !== 0 || error === undefined) {
-      alert(error)
-      window.location.reload()
-    }
-     // eslint-disable-next-line
-  }, [signedUpUser, error])
-  console.log(error)
+  if(passwordInput1) {
+    alert("Successfully Updated password")
+    window.location.reload()
+    Navigate('/')
+  }
 
   const btnDisable =
     !/[0-9]/.test(passwordInput) ||
     !(passwordInput.length >= 8) ||
     !/[A-Z]/.test(passwordInput) ||
     // eslint-disable-next-line no-useless-escape
-    !/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passwordInput) ||
-    wrongEmail || !emailInput || !FirstName || !lastName
+    !/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passwordInput)
 
   return (
     <Maincontainer>
       <CardBodyWrapper>
         <CardBody>
-          <Header>
-            <HeaderText>Create an Account</HeaderText>
-            <HeaderLink>
-              Already have an account?{' '}
-              <span>
-                {' '}
-                <Link
-                  to="/"
-                  style={{
-                    textDecoration: 'none',
-                    color: 'rgba(0, 76, 189, 1)',
-                  }}
-                >
-                  {' '}
-                  Log in
-                </Link>
-              </span>
-            </HeaderLink>
-          </Header>
           <FormData onSubmit={(e) => handleSubmit(e)}>
-            <FirstInput>
-              <NameInput>
-                <Label>First Name</Label>
-                <Input
-                  onChange={(e) => handleFirstName(e)}
-                  type="text"
-                  placeholder="Type Here"
-                />
-              </NameInput>
-              <LastName>
-                <Label>Last Name</Label>
-                <Input
-                  onChange={(e) => handleLastName(e)}
-                  type="text"
-                  placeholder="Type Here"
-                />
-              </LastName>
-            </FirstInput>
-            <EmailInput>
-              <Label>Email Address</Label>
-              <Input
-                onChange={(e) => handleEmail(e)}
-                type="email"
-                placeholder="Type Here"
-              />
-              {wrongEmail ? <span>Wrong email format!</span> : ''}
-            </EmailInput>
             <PasswordInput>
-              <Label>Password</Label>
+              <Label>New Password</Label>
               <PasswordIcon>
                 <Input2
                   type={passwordShow ? 'text' : 'password'}
-                  placeholder="Input password Here"
+                  placeholder="Input new password Here"
                   name="password"
                   onChange={(e) => handlePassword(e)}
                 />
@@ -221,8 +138,7 @@ const Signup = () => {
               disabled={btnDisable}
               style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
             >
-              
-              {loading ? (
+              {loading1 ? (
                 <SpinnerCircular
                   size={25}
                   thickness={91}
@@ -230,7 +146,7 @@ const Signup = () => {
                   color="rgba(57, 114, 172, 1)"
                   secondaryColor="rgba(0, 0, 0, 0.44)"
                 />
-              ) : 'Sign Up'}
+              ) : 'Reset Password'}
             </Button>
           </FormData>
         </CardBody>
@@ -238,7 +154,7 @@ const Signup = () => {
     </Maincontainer>
   )
 }
-export default Signup
+export default NewPassword
 
 const Button = style.button`
   width: 102%;
@@ -279,18 +195,7 @@ const PasswordIcon = style.div`
 const PasswordInput = style.div`
   width: 102%;
 `
-const EmailInput = style.div`
-  width: 100%;
-  margin-bottom: 3%;
-  span{
-  font-family: sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: #F41E10;
-  }
-`
+
 const Input2 = style.input`
   width: 90%;
   height: 30px;
@@ -299,69 +204,23 @@ const Input2 = style.input`
   border: none;
   padding-left: 10px;
 `
-const Input = style.input`
-  width: 100%;
-  height: 30px;
-  border-radius: 4px;
-  outline: none;
-  border:  1px solid lightgray;
-  padding-left: 10px;
-  margin: 1% 0px;
-`
+
 const Label = style.div`
   font-family: sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 17px;
   color: #1A1A1A;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  text-align: center;
 `
-const FirstInput = style.div`
-  margin-top: 7%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 3%;
-`
-const LastName = style.div`
-  width: 45%;
-`
-const NameInput = style.div`
-  width: 45%
-`
+
 const FormData = style.form`
   width: 100%
 `
-const HeaderLink = style.div`
-  ont-family: 'Montserrat';
-  ont-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: #777777;
-  span{
-    color: rgba(0, 76, 189, 1);
-    cursor: pointer;
-  }
-`
-const HeaderText = style.div`
-  margin-top: 3%;
-  width: 230px;
-  height: 29px;
-  font-family: sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
-  color: #000000;
-  text-align: center;
-`
-const Header = style.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`
+
 const Maincontainer = style.div`
     width: 100%;
     height: 100vh;
