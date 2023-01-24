@@ -44,7 +44,6 @@ const ForgotPassword = () => {
   }
   if (forgotPassword) {
     alert(forgotPassword)
-    window.location.reload()
     Navigate('/')
   }
 
