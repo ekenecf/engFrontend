@@ -79,7 +79,7 @@ const Signup = () => {
   console.log(wrongEmail)
 
   useEffect(() => {
-    if (signedUpUser._id && signedUpUser.loggedIn) {
+    if (signedUpUser._id) {
       Navigate(`/dashboard/${signedUpUser._id}`)
       window.location.reload()
     } else {
