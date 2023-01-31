@@ -108,7 +108,7 @@ const ForgotPassword = () => {
 export default ForgotPassword
 
 const Button = style.button`
-  width: 102%;
+  width: 100%;
   height: 40px;
   border-radius: 4px;
   border: none;
@@ -130,6 +130,11 @@ const EmailInput = style.div`
   font-size: 12px;
   line-height: 15px;
   color: #F41E10;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    margin-top: 8%;
   }
 `
 const Input = style.input`
@@ -200,8 +205,15 @@ const CardBodyWrapper = style.div`
 -moz-box-shadow: 2px 2px 5px -6px rgba(0,0,0,0.69);
 display: flex;
 justify-content: center;
+
+@media (max-width: 768px) {
+  width: 95%;
+}
 `
 const CardBody = style.div`
   width: 80%;
   height: 90%;
+  @media (max-width: 768px) {
+    width: 84%;
+  }
 `
