@@ -164,7 +164,7 @@ const Login = () => {
 export default Login
 
 const Button = style.button`
-  width: 102%;
+  width: 100%;
   height: 40px;
   background: #B7BCC3;
   border-radius: 4px;
@@ -228,15 +228,11 @@ const Laber = style.div`
   color: #1A1A1A;
 `
 const FormData = style.form`
-  width: 100%
+  width: 100%;
+  margin-top: 10%;
 `
 const HeaderLink = style.div`
-  ont-family: 'Montserrat';
-  ont-style: normal;
-  font-weight: 400;
-  font-size: 16px;
   line-height: 20px;
-  color: #777777;
   span{
     color: rgba(0, 76, 189, 1);
     cursor: pointer;
@@ -281,8 +277,9 @@ const CardBodyWrapper = style.div`
 display: flex;
 justify-content: center;
 
-@media screen and (max-width: 768px) {
-
+@media (max-width: 768px) {
+  width: 100%;
+  height: 60vh;
 }
 `
 

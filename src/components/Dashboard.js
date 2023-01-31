@@ -418,12 +418,20 @@ const Card = styled.div`
   border: 1px solid #f0f0f0;
   border-radius: 8px;
   margin: 3% 0.5%;
+  @media (max-width: 768px) {
+    min-width: 327px
+}
 `
 const CardBodyMain = styled.div`
   width: 90%;
   height: max-content;
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 768px) {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 `
 const MainBody = styled.div`
   width: 100%;
