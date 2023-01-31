@@ -87,7 +87,6 @@ const ForgotPassword = () => {
               disabled={btnDisable}
               style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
             >
-              Send Link
               {loading ? (
                 <SpinnerCircular
                   style={{ position: 'absolute', right: '20px' }}
@@ -97,7 +96,7 @@ const ForgotPassword = () => {
                   color="rgba(57, 114, 172, 1)"
                   secondaryColor="rgba(0, 0, 0, 0.44)"
                 />
-              ) : null}
+              ) : 'Send Link'}
             </Button>
           </FormData>
         </CardBody>
