@@ -89,7 +89,6 @@ const ForgotPassword = () => {
             >
               {loading ? (
                 <SpinnerCircular
-                  style={{ position: 'absolute', right: '20px' }}
                   size={25}
                   thickness={91}
                   speed={100}
