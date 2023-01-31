@@ -245,7 +245,7 @@ const Signup = () => {
 export default Signup
 
 const Button = style.button`
-  width: 102%;
+  width: 100%;
   height: 40px;
   border-radius: 4px;
   border: none;
@@ -383,6 +383,9 @@ const CardBodyWrapper = style.div`
 -moz-box-shadow: 2px 2px 5px -6px rgba(0,0,0,0.69);
 display: flex;
 justify-content: center;
+@media (max-width: 768px) {
+  width: 100%;
+}
 `
 const CardBody = style.div`
   width: 80%;
