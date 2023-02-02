@@ -13,9 +13,15 @@ export const setCreatePassword = (data) => ({
   payload: data,
 })
 
+export const setError = (data) => ({
+  type: ActionTypes.FETCH_DATA_ERROR,
+  payload: data,
+})
+
 const initialState = {
   loading1: false,
   passwordInput1: '',
+  error1: ''
 }
 
 const newPasswordReducer = (state = initialState, { type, payload }) => {
@@ -29,6 +35,12 @@ const newPasswordReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         passwordInput1: payload,
+        loading1: false,
+      }
+    case ActionTypes.FETCH_DATA_ERROR:
+      return {
+        ...state,
+        error1: payload,
         loading1: false,
       }
     default:

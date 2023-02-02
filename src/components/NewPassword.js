@@ -23,7 +23,7 @@ const NewPassword = () => {
     (state) => state.signUpReducer,
   )
 
-  const { loading1, passwordInput1 } = useSelector(
+  const { loading1, passwordInput1, error1 } = useSelector(
     (state) => state.newPasswordReducer,
   )
 
@@ -50,8 +50,13 @@ const NewPassword = () => {
 
   if (passwordInput1) {
     alert('Successfully Updated password')
-    window.location.reload()
+    // window.location.reload()
     Navigate('/')
+  }
+
+  if (error1) {
+    alert(`${error1}, Kindly make a new request for password request`)
+    Navigate('/forgotpassword')
   }
 
   const btnDisable =
