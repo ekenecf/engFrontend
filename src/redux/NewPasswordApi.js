@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { setLoadingData, setCreatePassword } from './NewPassword'
+import { setLoadingData, setCreatePassword, setError } from './NewPassword'
 
 export const postResetPassword = (userDetail, token) => (dispatch) => {
   dispatch(setLoadingData())
@@ -18,6 +18,7 @@ export const postResetPassword = (userDetail, token) => (dispatch) => {
       dispatch(setCreatePassword(response.data.status))
     })
     .catch((error) => {
+      dispatch(setError(error.response.data.message))
       console.log('issue', error)
     })
 }
