@@ -50,12 +50,12 @@ const NewPassword = () => {
 
   if (passwordInput1) {
     alert('Successfully Updated password')
-    // window.location.reload()
     Navigate('/')
+    window.location.reload()
   }
 
   if (error1) {
-    alert(`${error1}, Kindly make a new request for password request`)
+    alert(`${error1}, Kindly make a new request for password reset`)
     Navigate('/forgotpassword')
   }
 
