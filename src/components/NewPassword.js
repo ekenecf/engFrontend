@@ -51,7 +51,6 @@ const NewPassword = () => {
   if (passwordInput1) {
     alert('Successfully Updated password')
     Navigate('/')
-    window.location.reload()
   }
 
   if (error1) {
