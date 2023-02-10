@@ -99,8 +99,9 @@ const Dashboard = () => {
   }
 
   const handleCreatetext = () => {
-    if(addname === '' && addDescription === '') {
-      alert('Kindly input a text')
+    if(addname === '' || addDescription === '') {
+      alert('Kindly input a name or Add a note')
+      return;
     }
     const userDetail = { name: addname, description: addDescription }
     dispatch(postText(userDetail, getResponse._id))
@@ -126,9 +127,9 @@ const Dashboard = () => {
         <Verify>
           <span>
             You have not verified your email address.{' '}
-            <LinkMe onClick={() => handleResetLink()}> Click here</LinkMe>
+            <LinkMe onClick={() => handleResetLink()}> Click here{' '}</LinkMe>
             to resend verification link or check your email for verification
-            link
+            link, to enable dashboard access
           </span>
         </Verify>
       ) : null}
@@ -503,6 +504,9 @@ const Verify = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    height: 15vh;
+}
 `
 const MainContainer = styled.div`
   width: 100%;
