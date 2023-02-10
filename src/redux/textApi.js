@@ -23,7 +23,6 @@ export const getTexts = (id) => (dispatch) => {
 }
 
 export const postText = (textValues, id) => (dispatch) => {
-  console.log(id, 'this is id')
   const config = {
     headers: {
       'Content-Type': 'application/json',
