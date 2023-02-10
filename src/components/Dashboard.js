@@ -99,6 +99,9 @@ const Dashboard = () => {
   }
 
   const handleCreatetext = () => {
+    if(addname === '' && addDescription === '') {
+      alert('Kindly input a text')
+    }
     const userDetail = { name: addname, description: addDescription }
     dispatch(postText(userDetail, getResponse._id))
     alert('Successfully Created text')
