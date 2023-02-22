@@ -17,13 +17,9 @@ const LogoutAllDevices = () => {
 
   const dispatch = useDispatch()
   const Navigate = useNavigate()
-  const {
-    loading,
-    error,
-    logOutRes,
-    wrongEmail,
-    emailInput,
-  } = useSelector((state) => state.logInReducer)
+  const { loading, logOutRes, wrongEmail, emailInput } = useSelector(
+    (state) => state.logInReducer,
+  )
 
   const handleEmail = (e) => {
     const email = e.target.value
@@ -160,7 +156,7 @@ const FormData = style.form`
   width: 100%
 `
 
-const HeaderText = style.div`
+const HeaderText = style.p`
   margin-top: 3%;
   margin-bottom: 5%;
   width: 90%;
@@ -172,6 +168,11 @@ const HeaderText = style.div`
   line-height: 29px;
   color: #000000;
   text-align: center;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 80px;
+  font-size: 15px;
+  }
 `
 const Header = style.div`
   width: 100%;
@@ -179,6 +180,9 @@ const Header = style.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    height: 40vh;
+  }
 `
 
 const Maincontainer = style.div`
@@ -201,7 +205,7 @@ display: flex;
 justify-content: center;
 
 @media screen and (max-width: 768px) {
-
+  height: 100vh;
 }
 `
 
