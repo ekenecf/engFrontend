@@ -7,6 +7,7 @@ export const ActionTypes = {
   WRONGPASSWORD: 'WRONGPASSWORD',
   EMAILINPUT: 'EMAILINPUT',
   PASSWORDINPUT: 'PASSPOSTINPUT',
+  LOGOUTDEVISERESPONSE: 'LOGOUTDEVISERESPONSE'
 }
 
 export const setLoadingData = () => ({
@@ -38,15 +39,20 @@ export const setpasswordInput = (data) => ({
   type: ActionTypes.PASSWORDINPUT,
   payload: data,
 })
+export const setLogoutResponse = (data) => ({
+  type: ActionTypes.LOGOUTDEVISERESPONSE,
+  payload: data,
+})
 
 const initialState = {
   loading: false,
-  error: [],
+  error: '',
   addedUser: [],
   passwordShow: false,
   wrongEmail: false,
   emailInput: '',
   passwordInput: '',
+  logOutRes: '',
 }
 
 const logInReducer = (state = initialState, { type, payload }) => {
@@ -60,6 +66,12 @@ const logInReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         addedUser: payload,
+        loading: false,
+      }
+    case ActionTypes.LOGOUTDEVISERESPONSE:
+      return {
+        ...state,
+        logOutRes: payload,
         loading: false,
       }
     case ActionTypes.FETCH_DATA_ERROR:

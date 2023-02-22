@@ -63,100 +63,109 @@ const Login = () => {
     } else {
       Navigate('/')
     }
-    if (error.length > 0) {
-      alert(error)
-      window.location.reload()
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addedUser, error])
+  }, [addedUser])
 
   const btnDisable = wrongEmail || !passwordInput
 
+  if (error.length > 0 && error !== 'Already signedIn on another device') {
+    alert(error)
+    window.location.reload()
+  }
+
   return (
     <Maincontainer>
-      <CardBodyWrapper>
-        <CardBody>
-          <Header>
-            <HeaderText>Log in</HeaderText>
+      {error === 'Already signedIn on another device' ? (
+        <div>
+          {' '}
+          <LogoutAllDevices />{' '}
+        </div>
+      ) : (
+        <CardBodyWrapper>
+          <CardBody>
+            <Header>
+              <HeaderText>Log in</HeaderText>
+              <HeaderLink>
+                If you have no account,{' '}
+                <span>
+                  {' '}
+                  <Link
+                    to="/signup"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'rgba(0, 76, 189, 1)',
+                    }}
+                  >
+                    Sign up
+                  </Link>{' '}
+                </span>
+              </HeaderLink>
+            </Header>
+            <FormData onSubmit={(e) => handleSubmit(e)}>
+              <EmailInput>
+                <Laber>Email Address</Laber>
+                <Input
+                  onChange={(e) => handleEmail(e)}
+                  type="email"
+                  placeholder="Type Here"
+                />
+                {wrongEmail ? <span>Wrong email format!</span> : ''}
+              </EmailInput>
+              <PasswordInput>
+                <Laber>Password</Laber>
+                <PasswordIcon>
+                  <Input2
+                    type={passwordShow ? 'text' : 'password'}
+                    placeholder="Type Here"
+                    name="password"
+                    onChange={(e) => handlePassword(e)}
+                  />
+                  <AiOutlineEye
+                    style={{
+                      fontSize: '20px',
+                      cursor: 'pointer',
+                      marginLeft: '10px',
+                    }}
+                    onClick={showPassword}
+                  />
+                </PasswordIcon>
+              </PasswordInput>
+              <Button
+                type="submit"
+                disabled={btnDisable}
+                style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
+              >
+                {loading ? (
+                  <SpinnerCircular
+                    size={25}
+                    thickness={91}
+                    speed={100}
+                    color="rgba(57, 114, 172, 1)"
+                    secondaryColor="rgba(0, 0, 0, 0.44)"
+                  />
+                ) : (
+                  'Login'
+                )}
+              </Button>
+            </FormData>
             <HeaderLink>
-              If you have no account,{' '}
               <span>
                 {' '}
                 <Link
-                  to="/signup"
+                  to="/forgotpassword"
                   style={{
                     textDecoration: 'none',
                     color: 'rgba(0, 76, 189, 1)',
                   }}
                 >
-                  Sign up
+                  forgotpassword?
                 </Link>{' '}
               </span>
             </HeaderLink>
-          </Header>
-          <FormData onSubmit={(e) => handleSubmit(e)}>
-            <EmailInput>
-              <Laber>Email Address</Laber>
-              <Input
-                onChange={(e) => handleEmail(e)}
-                type="email"
-                placeholder="Type Here"
-              />
-              {wrongEmail ? <span>Wrong email format!</span> : ''}
-            </EmailInput>
-            <PasswordInput>
-              <Laber>Password</Laber>
-              <PasswordIcon>
-                <Input2
-                  type={passwordShow ? 'text' : 'password'}
-                  placeholder="Type Here"
-                  name="password"
-                  onChange={(e) => handlePassword(e)}
-                />
-                <AiOutlineEye
-                  style={{
-                    fontSize: '20px',
-                    cursor: 'pointer',
-                    marginLeft: '10px',
-                  }}
-                  onClick={showPassword}
-                />
-              </PasswordIcon>
-            </PasswordInput>
-            <Button
-              type="submit"
-              disabled={btnDisable}
-              style={{ background: btnDisable ? '#B7BCC3' : '#555658' }}
-            >
-              {loading ? (
-                <SpinnerCircular
-                  size={25}
-                  thickness={91}
-                  speed={100}
-                  color="rgba(57, 114, 172, 1)"
-                  secondaryColor="rgba(0, 0, 0, 0.44)"
-                />
-              ) : (
-                'Login'
-              )}
-            </Button>
-          </FormData>
-          <HeaderLink>
-            <span>
-              {' '}
-              <Link
-                to="/forgotpassword"
-                style={{
-                  textDecoration: 'none',
-                  color: 'rgba(0, 76, 189, 1)',
-                }}
-              >
-                forgotpassword?
-              </Link>{' '}
-            </span>
-          </HeaderLink>
-        </CardBody>
-      </CardBodyWrapper>
+          </CardBody>
+        </CardBodyWrapper>
+      )}
     </Maincontainer>
   )
 }
