@@ -55,10 +55,10 @@ const Dashboard = () => {
 
   function handleSaveClick(textId) {
     const editTextValues = { name: nameEdit, description: descriptionEdit }
-    dispatch(editText(editTextValues, getResponse._id, textId))
+    dispatch(editText(editTextValues, id, textId))
     dispatch(setIsEditing(''))
     alert('Edited successfully')
-    dispatch(getTexts(getResponse._id))
+    dispatch(getTexts(id))
   }
 
   function handleEditClick(textId) {
@@ -90,18 +90,18 @@ const Dashboard = () => {
   }
 
   const handleLogout = () => {
-    dispatch(postLogoutUser(getResponse._id))
+    dispatch(postLogoutUser(id))
     navigate('/')
   }
 
   useEffect(() => {
-    dispatch(getUser(getResponse._id))
-    dispatch(getTexts(getResponse._id))
+    dispatch(getUser(id))
+    dispatch(getTexts(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleResetLink = () => {
-    dispatch(linkToUser(getResponse._id))
+    dispatch(linkToUser(id))
   }
 
   const handleCreatetext = () => {
@@ -110,24 +110,22 @@ const Dashboard = () => {
       return
     }
     const userDetail = { name: addname, description: addDescription }
-    dispatch(postText(userDetail, getResponse._id))
+    dispatch(postText(userDetail, id))
     alert('Successfully Created text')
     removeAddBox()
-    dispatch(getTexts(getResponse._id))
+    dispatch(getTexts(id))
   }
 
-  const handleDeleteText = (id) => {
-    dispatch(deleteText(getResponse._id, id))
+  const handleDeleteText = (textId) => {
+    dispatch(deleteText(id, textId))
     alert('Successfully deleted text')
-    dispatch(getTexts(getResponse._id))
+    dispatch(getTexts(id))
   }
 
   if (resetLink) {
     alert('Sent successfully')
     window.location.reload()
   }
-
-  console.log(getResponse.verify)
 
   return (
     <MainContainer>
