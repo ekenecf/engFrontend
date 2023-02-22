@@ -19,7 +19,6 @@ const LogoutAllDevices = () => {
   const Navigate = useNavigate()
   const {
     loading,
-    error,
     logOutRes,
     wrongEmail,
     emailInput,
