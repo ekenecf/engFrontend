@@ -12,6 +12,7 @@ import {
   setemailInput,
   setpasswordInput,
 } from '../redux/Login'
+import LogoutAllDevices from './LogOutAllDevices'
 
 const Login = () => {
   const dispatch = useDispatch()

@@ -57,9 +57,6 @@ const LogoutAllDevices = () => {
 
   const btnDisable = wrongEmail
 
-  console.log(error, "error")
-  console.log(logOutRes,  "logOutRes")
-
   return (
     <Maincontainer>
       <CardBodyWrapper
