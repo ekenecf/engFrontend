@@ -112,13 +112,13 @@ const Dashboard = () => {
     dispatch(postText(userDetail, id ? id : getResponse._id))
     alert('Successfully Created text')
     removeAddBox()
-    dispatch(getTexts(id))
+    dispatch(getTexts(id ? id : getResponse._id))
   }
 
   const handleDeleteText = (textId) => {
     dispatch(deleteText(id ? id : getResponse._id, textId))
     alert('Successfully deleted text')
-    dispatch(getTexts(id))
+    dispatch(getTexts(id ? id : getResponse._id))
   }
 
   if (resetLink) {
