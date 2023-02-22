@@ -27,8 +27,6 @@ const Dashboard = () => {
 
   const { id } = location.state || {}
 
-  console.log(id)
-
   const getResponse = JSON.parse(localStorage.getItem('serverResponse'))
   const getTextItems = JSON.parse(localStorage.getItem('getText')) || []
 
@@ -55,7 +53,7 @@ const Dashboard = () => {
 
   function handleSaveClick(textId) {
     const editTextValues = { name: nameEdit, description: descriptionEdit }
-    dispatch(editText(editTextValues, id, textId))
+    dispatch(editText(editTextValues, id ? id : getResponse._id, textId))
     dispatch(setIsEditing(''))
     alert('Edited successfully')
     dispatch(getTexts(id))
@@ -90,18 +88,19 @@ const Dashboard = () => {
   }
 
   const handleLogout = () => {
-    dispatch(postLogoutUser(id))
+    dispatch(postLogoutUser(id ? id : getResponse._id))
+    localStorage.removeItem('serverResponse')
     navigate('/')
   }
 
   useEffect(() => {
-    dispatch(getUser(id))
-    dispatch(getTexts(id))
+    dispatch(getUser(id ? id : getResponse._id))
+    dispatch(getTexts(id ? id : getResponse._id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleResetLink = () => {
-    dispatch(linkToUser(id))
+    dispatch(linkToUser(id ? id : getResponse._id))
   }
 
   const handleCreatetext = () => {
@@ -110,14 +109,14 @@ const Dashboard = () => {
       return
     }
     const userDetail = { name: addname, description: addDescription }
-    dispatch(postText(userDetail, id))
+    dispatch(postText(userDetail, id ? id : getResponse._id))
     alert('Successfully Created text')
     removeAddBox()
     dispatch(getTexts(id))
   }
 
   const handleDeleteText = (textId) => {
-    dispatch(deleteText(id, textId))
+    dispatch(deleteText(id ? id : getResponse._id, textId))
     alert('Successfully deleted text')
     dispatch(getTexts(id))
   }
@@ -242,8 +241,9 @@ const Dashboard = () => {
                   fontWeight: '700',
                 }}
               >
-                {getResponse.verify === false ? 'Kindly verify your account to perform an operation' : 'Click on the button below to perform an operation'}
-                
+                {getResponse.verify === false
+                  ? 'Kindly verify your account to perform an operation'
+                  : 'Click on the button below to perform an operation'}
               </p>
             </div>
           )}
