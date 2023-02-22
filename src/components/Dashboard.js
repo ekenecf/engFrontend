@@ -99,9 +99,9 @@ const Dashboard = () => {
   }
 
   const handleCreatetext = () => {
-    if(addname === '' || addDescription === '') {
+    if (addname === '' || addDescription === '') {
       alert('Kindly input a name or Add a note')
-      return;
+      return
     }
     const userDetail = { name: addname, description: addDescription }
     dispatch(postText(userDetail, getResponse._id))
@@ -127,7 +127,7 @@ const Dashboard = () => {
         <Verify>
           <span>
             You have not verified your email address.{' '}
-            <LinkMe onClick={() => handleResetLink()}> Click here{' '}</LinkMe>
+            <LinkMe onClick={() => handleResetLink()}> Click here </LinkMe>
             to resend verification link or check your email for verification
             link, to enable dashboard access
           </span>
@@ -221,6 +221,7 @@ const Dashboard = () => {
                 height: '100vh',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flexDirection: 'column',
               }}
             >
               <SpinnerDotted
@@ -229,6 +230,14 @@ const Dashboard = () => {
                 speed={102}
                 color="rgba(87, 57, 172, 1)"
               />
+              <p
+                style={{
+                  fontSize: '15px',
+                  fontWeight: '700',
+                }}
+              >
+                Click on the button below to perform an operation
+              </p>
             </div>
           )}
         </CardBodyMain>
@@ -423,8 +432,8 @@ const Card = styled.div`
   border-radius: 8px;
   margin: 3% 0.5%;
   @media (max-width: 768px) {
-    min-width: 327px
-}
+    min-width: 327px;
+  }
 `
 const CardBodyMain = styled.div`
   width: 90%;
@@ -435,7 +444,7 @@ const CardBodyMain = styled.div`
     width: 100%;
     align-items: center;
     justify-content: center;
-}
+  }
 `
 const MainBody = styled.div`
   width: 100%;
@@ -506,7 +515,7 @@ const Verify = styled.div`
   align-items: center;
   @media (max-width: 768px) {
     height: 15vh;
-}
+  }
 `
 const MainContainer = styled.div`
   width: 100%;
