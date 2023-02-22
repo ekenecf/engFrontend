@@ -56,7 +56,7 @@ const Dashboard = () => {
     dispatch(editText(editTextValues, id ? id : getResponse._id, textId))
     dispatch(setIsEditing(''))
     alert('Edited successfully')
-    dispatch(getTexts(id))
+    dispatch(getTexts(id ? id : getResponse._id))
   }
 
   function handleEditClick(textId) {
