@@ -121,6 +121,8 @@ const Dashboard = () => {
     window.location.reload()
   }
 
+  console.log(getResponse.verify)
+
   return (
     <MainContainer>
       {!getResponse.verify ? (
@@ -236,7 +238,8 @@ const Dashboard = () => {
                   fontWeight: '700',
                 }}
               >
-                Click on the button below to perform an operation
+                {getResponse.verify === false ? 'Kindly verify your account to perform an operation' : 'Click on the button below to perform an operation'}
+                
               </p>
             </div>
           )}
