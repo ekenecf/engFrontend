@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { AiFillCaretDown } from 'react-icons/ai'
@@ -23,6 +23,12 @@ import {
 const Dashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
+
+  const { id } = location.state || {}
+
+  console.log(id)
+
   const getResponse = JSON.parse(localStorage.getItem('serverResponse'))
   const getTextItems = JSON.parse(localStorage.getItem('getText')) || []
 
