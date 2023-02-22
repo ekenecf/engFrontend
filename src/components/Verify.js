@@ -13,7 +13,7 @@ const { id } = useParams()
         <Card>
             <GoVerified style={{color: "green", fontSize: "40px"}}/>
             <Text>Your email address has been verified.</Text>
-            <Link to={`/dashboard/${id}`}>
+            <Link to={`/dashboard/${id}`} state={{ id }}>
             <Back >Go to Dashboard <BiRightArrow style={{color: "blue", fontSize: "15px"}} /></Back>
             </Link>
         </Card>
