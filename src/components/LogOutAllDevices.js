@@ -12,7 +12,7 @@ import { postLogoutDevices } from '../redux/LogOutDevicesApi'
 
 const LogoutAllDevices = () => {
   AOS.init({
-    duration: 1200,
+    duration: 1250,
   })
 
   const dispatch = useDispatch()
@@ -45,11 +45,8 @@ const LogoutAllDevices = () => {
       Navigate('/')
       window.location.reload()
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [logOutRes])
-
-  console.log(wrongEmail, emailInput.length)
 
   const btnDisable = wrongEmail
 
