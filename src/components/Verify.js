@@ -1,18 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import {GoVerified} from 'react-icons/go'
 import {BiRightArrow} from 'react-icons/bi'
 
 const Verify = () => {
-  const getResponse = JSON.parse(localStorage.getItem('serverResponse'))
+  // const getResponse = JSON.parse(localStorage.getItem('serverResponse'))
+const { id } = useParams()
 
   return (
    <Maincontainer>
         <Card>
             <GoVerified style={{color: "green", fontSize: "40px"}}/>
             <Text>Your email address has been verified.</Text>
-            <Link to={`/dashboard/${getResponse._id}`}>
+            <Link to={`/dashboard/${id}`}>
             <Back >Go to Dashboard <BiRightArrow style={{color: "blue", fontSize: "15px"}} /></Back>
             </Link>
         </Card>
