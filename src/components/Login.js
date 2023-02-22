@@ -70,14 +70,14 @@ const Login = () => {
 
   const btnDisable = wrongEmail || !passwordInput
 
-  if (error.length > 0 && error !== 'Already signedIn in another device') {
+  if (error.length > 0 && error !== 'Already signedIn on another device') {
     alert(error)
     window.location.reload()
   }
 
   return (
     <Maincontainer>
-      {error === 'Already signedIn in another device' ? (
+      {error === 'Already signedIn on another device' ? (
         <div>
           {' '}
           <LogoutAllDevices />{' '}
