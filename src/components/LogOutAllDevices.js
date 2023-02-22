@@ -64,7 +64,7 @@ const LogoutAllDevices = () => {
         <CardBody>
           <Header>
             <HeaderText>
-              Already signedIn on another device!! Do you wish to logOut from
+              You are already signedIn on another device!! Do you wish to logOut from
               all devices? Kindly fill-in your email
             </HeaderText>
           </Header>
