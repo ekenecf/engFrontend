@@ -17,7 +17,7 @@ const LogoutAllDevices = () => {
 
   const dispatch = useDispatch()
   const Navigate = useNavigate()
-  const { loading, error, logOutRes, wrongEmail, emailInput } = useSelector(
+  const { loading, logOutRes, wrongEmail, emailInput } = useSelector(
     (state) => state.logInReducer,
   )
 
