@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useLocation, useParams } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { AiFillCaretDown } from 'react-icons/ai'
