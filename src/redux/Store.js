@@ -4,7 +4,6 @@ import {
   applyMiddleware,
 } from 'redux'
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
 import logInReducer from './Login'
 import signUpReducer from './signUp'
 import resetReducer from './Resetlink'
@@ -23,6 +22,6 @@ const rootReducer = combineReducers({
   newPasswordReducer,
 })
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger))
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default store

@@ -19,6 +19,5 @@ export const postResetPassword = (userDetail, token) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(setError(error.response.data.message))
-      console.log('issue', error)
     })
 }

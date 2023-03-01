@@ -18,7 +18,6 @@ export const getTexts = (id) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(setDataError(error))
-      console.log('Catch error', error)
     })
 }
 
@@ -35,7 +34,6 @@ export const postText = (textValues, id) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(setDataError(error))
-      console.log('Catch error', error)
     })
 }
 
@@ -47,7 +45,6 @@ export const deleteText = (id, textId) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(setDataError(error))
-      console.log('Catch error', error)
     })
 }
 

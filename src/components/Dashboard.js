@@ -361,7 +361,7 @@ const AddDiv = styled.div`
   border-radius: 50%;
   background-color: blue;
   position: absolute;
-  bottom: 20px;
+  bottom: 60px;
   right: 50px;
   display: flex;
   justify-content: center;

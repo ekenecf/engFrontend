@@ -16,10 +16,8 @@ export const postLogoutDevices = (userDetail) => (dispatch) => {
     )
     .then((response) => {
       dispatch(setLogoutResponse(response.data.message));
-      console.log(response);
     })
     .catch((error) => {
       dispatch(setDataError(error.response.data.message));
-      console.log("Catch error", error);
     });
 };
