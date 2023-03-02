@@ -5,7 +5,6 @@ import {GoVerified} from 'react-icons/go'
 import {BiRightArrow} from 'react-icons/bi'
 
 const Verify = () => {
-  // const getResponse = JSON.parse(localStorage.getItem('serverResponse'))
 const { id } = useParams()
 
   return (

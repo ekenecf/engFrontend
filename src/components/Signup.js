@@ -4,7 +4,6 @@ import { AiOutlineEye } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { SpinnerCircular } from 'spinners-react'
-
 import { signUpUser } from '../redux/signUpApi'
 import {
   setemailInput,
@@ -76,7 +75,6 @@ const Signup = () => {
     }
     dispatch(signUpUser(userDetail))
   }
-  console.log(wrongEmail)
 
   useEffect(() => {
     if (signedUpUser._id) {

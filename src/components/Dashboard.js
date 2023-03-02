@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { AiFillCaretDown } from 'react-icons/ai'
 import { MdAdd } from 'react-icons/md'
 import { SpinnerDotted } from 'spinners-react'
-
 import { linkToUser } from '../redux/ResetlinkApi'
 import { getUser } from '../redux/userApi'
 import { postLogoutUser } from '../redux/LoginApi'

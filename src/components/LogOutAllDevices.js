@@ -3,10 +3,8 @@ import style from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { SpinnerCircular } from 'spinners-react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-
 import { setWrongEmail, setemailInput } from '../redux/Login'
 import { postLogoutDevices } from '../redux/LogOutDevicesApi'
 
